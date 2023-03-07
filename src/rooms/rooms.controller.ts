@@ -7,20 +7,19 @@ import {
   Param,
   Delete,
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 import { RoomsService } from './rooms.service'
-import { CreateRoomDto } from './dto/create-room.dto'
-import { UpdateRoomDto } from './dto/update-room.dto'
+import { CreateRoom } from './dto/create-room.dto'
+import { UpdateRoom } from './dto/update-room.dto'
 
+@ApiTags('Rooms')
 @Controller()
 export class RoomsController {
   constructor(private readonly roomsService: RoomsService) {}
 
   @Post()
-  create(
-    @Param('hotelId') hotelId: string,
-    @Body() createRoomDto: CreateRoomDto,
-  ) {
-    return this.roomsService.create(createRoomDto)
+  create(@Param('hotelId') hotelId: string, @Body() CreateRoom: CreateRoom) {
+    return this.roomsService.create(CreateRoom)
   }
 
   @Get()
@@ -37,9 +36,9 @@ export class RoomsController {
   @Patch(':id')
   update(
     @Param() params: { hotelId: string; id: string },
-    @Body() updateRoomDto: UpdateRoomDto,
+    @Body() UpdateRoom: UpdateRoom,
   ) {
-    return this.roomsService.update(params.id, updateRoomDto)
+    return this.roomsService.update(params.id, UpdateRoom)
   }
 
   @Delete(':id')

@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { compare } from 'bcrypt'
-import { CreateUserDto } from 'src/users/dto/create-user.dto'
+import { CreateUser } from 'src/users/dto/create-user.dto'
 import { UsersService } from 'src/users/users.service'
 
 @Injectable()
@@ -44,9 +44,9 @@ export class AuthService {
     return this.jwtService.sign(payload)
   }
 
-  async register(createUserDto: CreateUserDto) {
+  async register(CreateUser: CreateUser) {
     try {
-      return await this.userService.create(createUserDto)
+      return await this.userService.create(CreateUser)
     } catch (error) {
       if (error.code === 11000) {
         throw new BadRequestException('Email already exists')

@@ -1,4 +1,4 @@
-export class UpdateHotelDto {
+export class UpdateHotel {
   name?: string
   address?: string
   city?: string

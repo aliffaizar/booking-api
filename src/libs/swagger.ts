@@ -1,10 +1,9 @@
 import { DocumentBuilder } from '@nestjs/swagger'
 
 const swaggerConfig = new DocumentBuilder()
-  .setTitle('NestJS API')
-  .setDescription('NestJS API description')
+  .setTitle('Booking API')
+  .setDescription('Booking API with NestJS')
   .setVersion('1.0')
-  .addTag('NestJS')
   .build()
 
 export default swaggerConfig

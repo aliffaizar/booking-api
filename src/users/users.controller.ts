@@ -10,17 +10,19 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { UsersService } from './users.service'
-import { CreateUserDto } from './dto/create-user.dto'
-import { UpdateUserDto } from './dto/update-user.dto'
+import { CreateUser } from './dto/create-user.dto'
+import { UpdateUser } from './dto/update-user.dto'
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags('Users')
 @Controller()
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto)
+  create(@Body() CreateUser: CreateUser) {
+    return this.usersService.create(CreateUser)
   }
 
   @Get()
@@ -35,8 +37,8 @@ export class UsersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(id, updateUserDto)
+  update(@Param('id') id: string, @Body() UpdateUser: UpdateUser) {
+    return this.usersService.update(id, UpdateUser)
   }
 
   @Delete(':id')

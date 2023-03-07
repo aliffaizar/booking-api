@@ -1,6 +1,6 @@
 import { IsString, IsNotEmpty } from 'class-validator'
 
-export class CreateHotelDto {
+export class CreateHotel {
   @IsString()
   @IsNotEmpty()
   name: string

@@ -7,17 +7,17 @@ import {
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 
-import { CreateUserDto } from './dto/create-user.dto'
-import { UpdateUserDto } from './dto/update-user.dto'
+import { CreateUser } from './dto/create-user.dto'
+import { UpdateUser } from './dto/update-user.dto'
 import { User, UserDocument } from './schemas/user.schema'
 
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async create(CreateUser: CreateUser) {
     try {
-      return await this.userModel.create(createUserDto)
+      return await this.userModel.create(CreateUser)
     } catch (error) {
       if (error.code === 11000) {
         throw new ConflictException('Email already exists')
@@ -40,16 +40,16 @@ export class UsersService {
     return this.userModel.findById(id)
   }
 
-  async findOrCreate(createUserDto: CreateUserDto): Promise<User> {
-    const user = await this.userModel.findOne({ email: createUserDto.email })
+  async findOrCreate(CreateUser: CreateUser): Promise<User> {
+    const user = await this.userModel.findOne({ email: CreateUser.email })
     if (user) {
       return user
     }
-    return await this.create(createUserDto)
+    return await this.create(CreateUser)
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto) {
-    return await this.userModel.findByIdAndUpdate(id, updateUserDto, {
+  async update(id: string, UpdateUser: UpdateUser) {
+    return await this.userModel.findByIdAndUpdate(id, UpdateUser, {
       new: true,
     })
   }

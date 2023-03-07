@@ -6,19 +6,20 @@ import {
   Patch,
   Param,
   Delete,
-  NotFoundException,
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 import { HotelsService } from './hotels.service'
-import { CreateHotelDto } from './dto/create-hotel.dto'
-import { UpdateHotelDto } from './dto/update-hotel.dto'
+import { CreateHotel } from './dto/create-hotel.dto'
+import { UpdateHotel } from './dto/update-hotel.dto'
 
+@ApiTags('Hotels')
 @Controller()
 export class HotelsController {
   constructor(private readonly hotelsService: HotelsService) {}
 
   @Post()
-  create(@Body() createHotelDto: CreateHotelDto) {
-    return this.hotelsService.create(createHotelDto)
+  create(@Body() CreateHotel: CreateHotel) {
+    return this.hotelsService.create(CreateHotel)
   }
 
   @Get()
@@ -32,8 +33,8 @@ export class HotelsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateHotelDto: UpdateHotelDto) {
-    return this.hotelsService.update(id, updateHotelDto)
+  update(@Param('id') id: string, @Body() UpdateHotel: UpdateHotel) {
+    return this.hotelsService.update(id, UpdateHotel)
   }
 
   @Delete(':id')

@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { CreateHotelDto } from './dto/create-hotel.dto'
-import { UpdateHotelDto } from './dto/update-hotel.dto'
+import { CreateHotel } from './dto/create-hotel.dto'
+import { UpdateHotel } from './dto/update-hotel.dto'
 import { Hotel, HotelDocument } from './schemas/hotel.schema'
 
 @Injectable()
@@ -11,8 +11,8 @@ export class HotelsService {
     @InjectModel(Hotel.name) private hotelModel: Model<HotelDocument>,
   ) {}
 
-  async create(createHotelDto: CreateHotelDto) {
-    return await this.hotelModel.create(createHotelDto)
+  async create(CreateHotel: CreateHotel) {
+    return await this.hotelModel.create(CreateHotel)
   }
 
   async findAll() {
@@ -27,7 +27,7 @@ export class HotelsService {
     }
   }
 
-  update(id: string, updateHotelDto: UpdateHotelDto) {
+  update(id: string, UpdateHotel: UpdateHotel) {
     return `This action updates a #${id} hotel`
   }
 

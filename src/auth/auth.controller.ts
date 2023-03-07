@@ -6,10 +6,12 @@ import {
   Response,
   UseGuards,
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 import { AuthService } from './auth.service'
 import { GoogleAuthGuard } from './google-auth.guard'
 import { LocalAuthGuard } from './local-auth.guard'
 
+@ApiTags('Authentication')
 @Controller('')
 export class AuthController {
   constructor(private authService: AuthService) {}
