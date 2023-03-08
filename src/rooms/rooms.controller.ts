@@ -19,7 +19,7 @@ export class RoomsController {
 
   @Post()
   create(@Param('hotelId') hotelId: string, @Body() CreateRoom: CreateRoom) {
-    return this.roomsService.create(CreateRoom)
+    return this.roomsService.create(CreateRoom, hotelId)
   }
 
   @Get()

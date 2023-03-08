@@ -1,4 +1,4 @@
-import { Prop, Schema } from '@nestjs/mongoose'
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import * as mongoose from 'mongoose'
 import { Hotel } from 'src/hotels/schemas/hotel.schema'
 
@@ -34,15 +34,8 @@ export class Room {
   @Prop()
   images: string[]
 
-  @Prop()
-  roomNumbers: [
-    {
-      number: number
-      unavailableDates: Date[]
-    },
-  ]
-
-  @Prop()
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Hotel' })
   hotel: Hotel
 }
+
+export const RoomSchema = SchemaFactory.createForClass(Room)
